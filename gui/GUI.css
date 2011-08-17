@@ -1,0 +1,579 @@
+
+/***** G E N E R A L *****/
+
+body {
+	font-size:12px;
+	font-family:sans-serif;
+    background:#888888;
+}
+body * {
+	box-sizing: border-box!important;
+	-moz-box-sizing: border-box!important;
+}
+
+#libs {
+	position:fixed;
+	top:0;
+	left:0px;
+	width:100px;
+	bottom:0;
+	background:#777;
+	border-right: solid 4px #ddd;
+}
+
+
+#tabs {
+	position:fixed;
+	top:0;
+	left:100px;
+	right:0;
+	height:24px;
+	background:#999;
+}
+#patches {
+	position:fixed;
+	bottom:0;
+	left:100px;
+	right:0;
+	top:24px;
+}
+
+#texteditor {
+    position:fixed;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index:100;
+	background:white;
+	overflow:hidden;
+	opacity:0.8;
+	font-size:16px;
+}
+#texteditor .texteditor-toolbar {
+	background:#ddd;
+}
+
+#menus {
+	position:fixed;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	z-index:200;
+}
+.menu {
+  cursor: default;
+  position:absolute;
+  background:white;
+  border: gold 1px solid;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.5);
+}
+.menu .menu-item {
+  margin:0;
+  padding:2px 6px;
+  border:none;
+  -webkit-transition: background 0.3s ease,color 0.3s ease;
+}
+.menu .menu-item:hover {
+	background:#448;
+	color:white;
+}
+.menu .menu-separator {
+  display:block;
+  height:0px;
+  margin:0 2px;
+  border-bottom: solid 1px silver;
+}
+
+/**** P A T C H ******/
+
+.patch-wrap {
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	overflow:auto;
+	display: none;
+	background:#ddd;
+}
+.patch-wrap.selected {
+	display:block;
+}
+.patch-tab {
+	margin:3px 0px 0px 4px!important;
+ 	border:none;
+	padding:2px 12px 20px 12px;
+    vertical-align:top;
+	background:#bbb;
+	border-radius:6px;
+} 
+
+.patch-tab.selected {
+	background:#ddd;
+} 
+
+
+.toolbar {
+	position:absolute;
+	top:0;
+	height:36px;
+	background:#ddd;
+	z-index:3;
+	padding:4px;
+}
+
+.patch-toolbar {
+	left:0;
+}
+
+.run-toolbar {
+	right:0;
+}
+
+.toolbar button img {
+	width:32px;
+	height:32px;
+	margin:-2px;
+	
+}
+.toolbar button {
+	padding:0;
+	margin:0px!important;
+	font-size:11px;
+	border:none;
+	opacity:0.8;
+	overflow:hidden;
+	position:relative;
+}
+.toolbar button:hover {
+	opacity:1;
+	xbackground:#eee;
+	top:-1px;
+	xleft:-1px;
+}
+.toolbar button:active {
+	xopacity:1;
+	xbackground:#eee;
+	top:1px;
+	xleft:-1px;
+}
+.patch-canvas {
+	position:absolute;
+	top:36px;
+	left:0;
+	bottom:0;
+	right:0;
+	overflow:auto;
+}
+.patch-wrap.gui-alt .patch-canvas {
+	cursor:move;
+}
+.patch-wrap .patch-canvas.gui-panning {
+	cursor:move;
+}
+
+.patch-toolbar-separator {
+   display:inline-block;
+   border-left:solid 1px #bbb;
+   margin: 4px 6px;
+   height:24px;
+   vertical-align:top;
+}
+.things {
+	left:0;
+	z-index:2;
+}
+.connections {
+	top:0px;
+	left:0;
+	width:10000px;
+	height:10000px;
+	background:url(img/back.png);
+}
+/***** T H I N G *****/
+
+.things .thing {
+ 	background:rgba(175,175,190,0.8);
+	position:absolute;
+	min-width:12em;
+	border-top-left-radius:0.5em;
+	border-top-right-radius:0.5em;
+	border-bottom-left-radius:0.25em;
+	border-bottom-right-radius:0.25em;
+	box-shadow: 1px 1px 12px rgba(0,0,0,0.5);
+}
+
+.things .thing.minimized .thing-minimize {
+	display:none;
+} 
+.things .thing.normal .thing-unminimize {
+	display:none;
+} 
+
+.things .thing .thing-header {
+	background:#888899;
+	border-top-left-radius:0.5em;
+	border-top-right-radius:0.5em;
+	position:relative;
+	color:white;
+	padding:0.25em;
+	padding-left: 0.75em;
+	padding-right:0.75em;
+}
+.things .thing .thing-name {
+	display: inline-block;
+	position:relative;
+	padding:0;
+	max-width:7em;
+	cursor:default;
+}
+
+.things .thing .thing-buttons {
+	display: inline-block;
+	position:absolute;
+	top:0.25em;
+	right:0.25em;
+	white-space:nowrap;
+}
+
+.things .thing.kind-node .thing-header,
+.things .thing.minimized.kind-node {
+	background:#66a
+}
+.things .thing.kind-patch .thing-header,
+.things .thing.minimized.kind-patch {
+	background:#6a6
+}
+.things .thing.kind-pipe .thing-header,
+.things .thing.minimized.kind-pipe {
+	background:#aa6
+}
+
+
+.things .thing .thing-remove {
+}
+.things .thing .thing-pins {
+	padding: 0.25em 0;
+}
+.things .thing .thing-inputs {
+	float:left;
+}
+.things .thing .thing-outputs {
+	float:right;
+}
+.things .thing.edit .develop {
+	display:none;
+}
+.things .thing.develop .develop {
+
+}
+.things .thing.selected {
+	box-shadow: 2px 2px 12px black, 0 0 8px gold, 0 0 12px gold, 3px 3px 8px gold, 3px 3px 12px gold;
+}
+.things .thing.selected .thing-name {
+	cursor:text;
+}
+
+
+
+/***** P I N *****/
+
+.things .thing .pin {
+	position:relative;
+	padding: 0 0.5em;
+	min-height:0.8em;
+	clear:both;
+}
+.things .thing.display .pin.hidden {
+    display:none;
+}
+.things .thing.edit .pin.hidden .pin-name {
+	color:#666;
+}
+
+.things .thing .pin.input > *{
+	float:left;
+}
+.things .thing .pin.output > *{
+    float:right;
+    text-align:right;
+}
+.things .thing .pin .pin-type {
+	display:inline;
+	width:4em;
+	height:1.5em;
+	overflow:hidden;
+	font-size:90%;
+	color:#666;
+	cursor:pointer;
+	text-align:center;
+}
+.things .thing .pin .pin-value {
+	display: inline;
+	width: 6em;
+	height:1.5em;
+	overflow:hidden;
+	color:#666;
+}
+.things .thing .pin.output .pin-value.edit {
+	background:white;
+	outline:solid 2px gold;
+}
+.things .thing .pin .pin-value.big {
+	display: block;
+	clear:both;
+	overflow:hidden;
+	color:#666;
+	width:auto;
+	height:auto;
+}
+
+.things .thing .pin .pin-name {
+	display: inline;
+	height:1.5em;
+	width: 4em;
+	margin:0 0.5em;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.thing .pin.input.disconnected .pin-value.display:hover {
+   background:white;
+}
+/***** C O N N E C T O R S *****/
+
+
+.things .thing .pin .pin-connector {
+	display:inline-block;
+	width:0.6em;
+	height:0.6em;
+	background:url(img/silver_dot.png) center center;
+	border-radius:100%;
+	top:0.4em;
+	position:absolute;
+}
+.things .thing .pin.disconnected.hideConnector .pin-connector,
+.things .thing .pin.disconnected.hidden .pin-connector {
+	display:none;
+}
+.things .thing .pin .pin-connector:hover {
+	opacity:1;
+	width:1em;
+	height:1em;
+	top:0.2em;
+}
+
+.things .thing .pin.input .pin-connector {
+	left: -0.3em;
+}
+.things .thing .pin.input .pin-connector:hover {
+	left: -0.5em;
+}
+.things .thing .pin.output .pin-connector {
+	right: -0.3em;
+}
+.things .thing .pin.output .pin-connector:hover {
+	right: -0.5em;
+}
+.things .thing .pin.connected .pin-connector {
+	background:url(img/gold_dot.png) center center;
+}
+.things .thing .pin.selected .pin-connector {
+	box-shadow: 0 0 8px red;
+}
+
+/***** E D I T I N G  *****/
+
+.things .thing.display .thing-editor {
+	display:none;
+}
+
+
+.things .edit > input[type=text], 
+.things .edit > select {
+	border:solid 1px silver;
+	font: inherit;
+	width:100%;
+	height:100%;
+	margin:-1px;
+	padding:inherit;
+}
+.thing-button {
+	font-size:0.66em;
+	display: inline-block;
+	background:rgba(200,200,200,0.2);
+	color:#ccc;
+	border-radius:50%;
+	font-weight:bold;
+	-moz-box-sizing:border-box;
+	padding:0.35em 0;
+	margin-left:0.5em;
+	text-align:center;
+	vertical-align:bottom;
+	cursor:pointer;
+	min-width:1.75em;
+	height:1.75em!important;
+}
+.thing-button:hover {
+	background:rgba(200,200,200,0.7);
+	color:black;
+}
+.thing-button.thing-add-input:hover,
+.thing-button.thing-add-output:hover {
+	background:gold;
+	color:black;
+}
+
+.things .thing .pin .pin-type.edit {
+	cursor:default;
+	background:white;
+	border:solid silver 1px;
+}
+
+
+.things .thing.minimized {
+   margin-top:1.25em;
+   padding:0;
+   min-width:2em;
+   border-radius:0.5em;
+   padding-bottom:0.5em;
+}
+
+.things .thing.minimized .thing-pins {
+   min-height:1em;
+}
+
+.things .thing.minimized .pin-name, 
+.things .thing.minimized .pin-value, 
+.things .thing.minimized .pin-type,
+.things .thing.minimized .thing-buttons
+{
+   display:none;
+}
+ 
+ .things .thing.minimized:hover .thing-header  .thing-buttons {
+	display:inline-block;
+	margin-top:-1.25em;
+ }
+ .things .thing.minimized .thing-name  > input {
+    height:1.5em;
+    position:relative;
+    top:1px;
+ }
+.things .thing.minimized .thing-outputs {
+   clear:none;
+}
+.things .thing.instance .thing-edit {
+   display:none;
+}
+.things .thing.minimized .thing-name {
+   position:relative;
+   display:block;
+   top:0em;
+   clear:both;
+   whitespace:nowrap;
+   text-align:center;
+}
+.things .thing.minimized .thing-header {
+
+  padding-top:0;
+  padding-bottom:0;
+  height:0!important;
+  overflow:visible;
+}
+.things .thing.unique .thing-name {
+   font-weight:bold;
+}
+/**** O V E R R I D E S   F O R   K I N D S *****/
+
+.things .thing.kind-pipe .pin.output .pin-name,
+.things .thing.kind-pipe .pin.output .pin-value,
+.things .thing.kind-pipe .pin.output .pin-type {
+	display:none
+}
+
+ .thing-outputs,.thing-inputs {
+  clear:both;
+}
+
+.things .thing.kind-portin .thing-add-input,
+.things .thing.kind-portout .thing-add-output {
+	display:none;
+}
+/******** C O D E   M I R R O R ********/
+.editor-expr {
+	top:100px;
+	bottom:100px;
+	left:100px;
+	right:100px;
+	position:fixed;
+	z-index:100;
+	text-align:left;
+	font-size:16px;
+	border:solid 2px gold;
+	border-radius:6px;
+}
+
+.editor-expr-toolbar {
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+	position:absolute;
+	top:0;
+	height:24px;
+	left:0;
+	right:0;
+	z-index:100;
+	text-align:left;
+	font-size:16px;
+	background:#ddd;
+	padding:0 6px;
+}
+.editor-expr-toolbar button {
+	font-size:12px;
+	border:solid 1px silver;
+}
+.editor-expr-container {
+	top:24px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	position:absolute;
+	background:white;
+	z-index:100;
+	text-align:left;
+	font-size:16px;
+	opacity:0.8;
+}
+.things .thing .pin .edit .CodeMirror {
+}
+.things .thing .pin .edit .CodeMirror-lines {
+	font-weight:normal;
+	line-height:125%;
+}
+
+:focus {
+	border: solid 1px silver!important;
+	box-shadow:none!important;
+	outline:none!important;
+}
+
+/**** LIBS ***/
+#libs .lib-item {
+  margin:0.5em 0.5em 0;
+  padding:4px;
+  background:#ddd;
+  border-radius: 0.5em;
+  text-align:center;
+  position:relative;
+}
+
+body>.lib-item.dragging {
+  margin:0;
+  background:#ddd;
+  border-radius: 0.5em;
+  z-index:1000;
+  opacity:0.5;
+  text-align:center;
+  position:fixed;
+  padding:4px;
+}

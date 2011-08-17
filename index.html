@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<script src="lib/processing.js"></script>
+<script src="lib/jq.js"></script>
+<script src="lib/jq-drag.js"></script>
+<script src="lib/jq-wheel.js"></script>
+
+<script src="lib/cm/lib/codemirror.js"></script>
+<link rel="stylesheet" href="lib/cm/lib/codemirror.css">
+<script src="lib/cm/mode/javascript/javascript.js"></script>
+<link rel="stylesheet" href="lib/cm/theme/default.css">
+
+
+<script src="core/Pins.js"></script>
+<script src="core/Thing.js"></script>
+<script src="core/Pipe.js"></script>
+<script src="core/Node.js"></script>
+<script src="core/Ports.js"></script>
+<script src="core/Patch.js"></script>
+<script src="core/PatchUtils.js"></script>
+
+<script src="gui/GUI.js"></script>
+<script src="gui/GuiPatchUtils.js"></script>
+<script src="gui/GuiEditorUtils.js"></script>
+<script src="gui/GuiEvents.js"></script>
+<script src="gui/GuiEditors.js"></script>
+<script src="gui/GuiTypes.js"></script>
+
+<link rel="stylesheet" href="gui/GUI.css">
+
+<script>
+	var gui;
+	$(function() {
+		gui = new GUI();
+		gui.open('root');
+		
+		/*$('#go').click(function() {
+			var processingCode = $('#code').val();   
+			var jsCode = Processing.compile(processingCode).sourceCode;
+			console.log(jsCode);
+			var processingInstance = new Processing($('#processing').get(0), processingCode);
+			processingInstance.loop();
+		})
+		*/
+	});
+
+</script> 
+</head>
+<body>
+<div id ="main">
+	<div id ="tabs"></div>
+	<div id ="libs"></div>
+	<div id = "patches"></div>
+</div>
+<div id = "texteditor"></div>
+<div id = "menus"></div>
+<!--<textarea id="code"></textarea><button id="go">go</button>
+<canvas id="processing" width="300" height="300"></canvas>-->
+</body>
+</html>
